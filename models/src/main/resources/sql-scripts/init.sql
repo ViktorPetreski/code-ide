@@ -1,0 +1,1 @@
+INSERT INTO ide_entity (code, exerciseID) VALUES ('x=input()\nprint(x)', 1), ('x=input()\nprint(x**2)', 2);

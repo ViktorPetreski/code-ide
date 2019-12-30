@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-ide-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-ide
+  template:
+    metadata:
+      labels:
+        app: code-ide
+    spec:
+      containers:
+        - image: petreskiv/code-ide:1.0.0-SNAPSHOT-1.0
+          name: code-ide
+          env:
+            - name: KUMULUZEE_DISCOVERY_CLUSTER
+              value: code
+            - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+              value: http://etcd:2379
+            - name: KUMULUZEE_CONFIG_ETCD_HOSTS
+              value: http://etcd:2379
+            - name: KUMULUZEE_SERVER_BASEURL
+              value: http://34.67.168.202:8080
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://10.64.240.3:5432/code-ide
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: postgres
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: laptop
+          ports:
+            - containerPort: 8084
+              name: server
+              protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-ide
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: code-ide
