@@ -14,7 +14,7 @@ cache:
     - $HOME/.m2
 
 env:
-  - DOCKER_IMAGE=petreskiv/code-outputs:1.0-SNAPSHOT-$TRAVIS_JOB_NUMBER
+  - DOCKER_IMAGE=petreskiv/code-ide:1.0-SNAPSHOT-$TRAVIS_JOB_NUMBER
 
 script:
   - mvn clean package -U
