@@ -13,7 +13,7 @@ spec:
         app: code-ide
     spec:
       containers:
-        - image: petreskiv/code-ide:1.0-SNAPSHOT-4.1
+        - image: petreskiv/code-ide:1.0-SNAPSHOT-5.1
           name: code-ide
           env:
             - name: KUMULUZEE_DISCOVERY_CLUSTER
