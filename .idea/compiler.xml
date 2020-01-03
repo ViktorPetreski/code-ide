@@ -12,5 +12,8 @@
         <module name="models" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="code-ide" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
