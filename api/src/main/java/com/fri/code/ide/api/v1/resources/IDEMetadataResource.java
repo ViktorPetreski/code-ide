@@ -50,6 +50,8 @@ public class IDEMetadataResource {
             return Response.status(Response.Status.NOT_FOUND).entity(getNotFoundApiError("")).build();
         }
         historyMetadataBean.createHistoryMetadata(ideMetadata);
+        List<HistoryMetadata> historyMetadata = historyMetadataBean.getHistoryForExercise(ideMetadata.getExerciseID());
+        ideMetadata.setCodeHistory(historyMetadata);
         return Response.status(Response.Status.OK).entity(ideMetadata).build();
     }
 
@@ -66,6 +68,8 @@ public class IDEMetadataResource {
             try {
                 ideMetadata = ideMetadataBean.createIDEMetadata(ideMetadata);
                 historyMetadataBean.createHistoryMetadata(ideMetadata);
+                List<HistoryMetadata> historyMetadata = historyMetadataBean.getHistoryForExercise(ideMetadata.getExerciseID());
+                ideMetadata.setCodeHistory(historyMetadata);
             } catch (Exception e) {
                 error.setMessage(e.getMessage());
                 return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
@@ -78,6 +82,8 @@ public class IDEMetadataResource {
     @Path("revert")
     public Response revertCode(@QueryParam("historyID") Integer historyID) {
         IDEMetadata updatedMetadata = ideMetadataBean.revertToCodeHistory(historyID);
+//        List<HistoryMetadata> historyMetadata = historyMetadataBean.getHistoryForExercise(ideMetadata.getExerciseID());
+//        updatedMetadata.setCodeHistory(historyMetadata);
         return Response.ok(updatedMetadata).build();
     }
 
