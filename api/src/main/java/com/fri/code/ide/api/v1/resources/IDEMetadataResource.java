@@ -5,6 +5,7 @@ import com.fri.code.ide.lib.HistoryMetadata;
 import com.fri.code.ide.lib.IDEMetadata;
 import com.fri.code.ide.services.beans.HistoryMetadataBean;
 import com.fri.code.ide.services.beans.IDEMetadataBean;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,6 +27,7 @@ public class IDEMetadataResource {
 
 
     @GET
+    @Timed
     public Response getAllScripts() {
         List<IDEMetadata> scripts = ideMetadataBean.getAllScripts();
         return Response.ok(scripts).build();

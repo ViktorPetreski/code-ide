@@ -13,7 +13,7 @@ spec:
         app: code-ide
     spec:
       containers:
-        - image: petreskiv/code-ide:1.0.0-SNAPSHOT-1.0
+        - image: petreskiv/code-ide:1.0-SNAPSHOT-4.1
           name: code-ide
           env:
             - name: KUMULUZEE_DISCOVERY_CLUSTER
@@ -34,6 +34,18 @@ spec:
             - containerPort: 8084
               name: server
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
 ---
 
 apiVersion: v1
