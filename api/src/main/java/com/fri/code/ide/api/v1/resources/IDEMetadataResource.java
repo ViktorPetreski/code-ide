@@ -7,6 +7,7 @@ import com.fri.code.ide.services.beans.HistoryMetadataBean;
 import com.fri.code.ide.services.beans.IDEMetadataBean;
 import com.kumuluz.ee.logs.cdi.Log;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,8 +37,8 @@ public class IDEMetadataResource {
     @GET
     @Operation(summary = "Get all scripts", description = "Returns all scripts.",
             responses = {
-                    @ApiResponse(description = "All scripts", responseCode = "200", content = @Content(schema = @Schema(implementation =
-                            IDEMetadata.class)))
+                    @ApiResponse(description = "All scripts", responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation =
+                            IDEMetadata.class))))
             }
     )
     @Timed
@@ -49,8 +50,8 @@ public class IDEMetadataResource {
     @GET
     @Operation(summary = "Get script details", description = "Returns script details for chosen exercise.")
     @ApiResponses({
-            @ApiResponse(description = "Script details", responseCode = "200", content = @Content(schema = @Schema(implementation =
-                    IDEMetadata.class)))
+            @ApiResponse(description = "Script details", responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation =
+                    IDEMetadata.class))))
     })
     @Path("{exerciseID}")
     public Response getScriptsForExercise(@PathParam("exerciseID") Integer exerciseID) {
