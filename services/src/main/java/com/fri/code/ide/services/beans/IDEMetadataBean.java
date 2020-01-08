@@ -34,6 +34,7 @@ public class IDEMetadataBean {
 
     public IDEMetadata getIDEForExercise(Integer exerciseID) {
         TypedQuery<IDEMetadataEntity> query = em.createNamedQuery("IDEMetadataEntity.getIDEForExercise", IDEMetadataEntity.class).setParameter(1, exerciseID);
+        log.info(String.format("Get ide for %d exercise", exerciseID));
         return IDEMetadataConverter.toDTO(query.getSingleResult());
     }
 
